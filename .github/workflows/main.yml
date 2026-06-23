@@ -1,0 +1,12 @@
+name: Check App
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python -c "import ast; ast.parse(open('app.py').read()); print('Syntax OK')"
